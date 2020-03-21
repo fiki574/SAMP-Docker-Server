@@ -1,0 +1,56 @@
+version: "2"
+
+services:
+  samp-server:
+    container_name: samp-server
+    image: samp-server:latest
+    restart: unless-stopped
+    ports:
+      - 7777:7777/udp
+    networks:
+      - samp-network
+
+  samp-adminer:
+    container_name: samp-adminer
+    image: adminer:latest
+    restart: unless-stopped
+    ports:
+      - 7778:8080
+    networks:
+      - admin-network
+
+  samp-portainer:
+    container_name: samp-portainer
+    image: portainer/portainer:latest
+    command: -H unix:///var/run/docker.sock
+    restart: unless-stopped
+    ports:
+      - 7779:9000
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "samp-portainer-data:/data"
+
+  samp-mysql:
+    container_name: samp-mysql
+    image: mysql:latest
+    restart: unless-stopped
+    volumes:
+      - "samp-mysql-data:/var/lib/mysql"
+    networks:
+      - samp-network
+      - admin-network
+    environment:
+      MYSQL_DATABASE: 'samp'
+      MYSQL_USER: 'samp'
+      MYSQL_PASSWORD: 'p455w0r9'
+      MYSQL_ROOT_PASSWORD: 'r007p455w0r9'
+
+networks:
+  samp-network:
+    driver: bridge
+  admin-network:
+    driver: bridge
+
+volumes:
+  samp-portainer-data: {}
+  samp-mysql-data: {}
