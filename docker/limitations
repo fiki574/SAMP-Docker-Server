@@ -1,4 +1,5 @@
 - Must have complete server structure on Git repository, including binaries (executables, plugins, NPC recordings)
+- Must build new image even for a simple configuration change
 - No "scriptfiles" persistence, so once the container is stopped any log or similarly updated configuration/temporary/storage file is lost
 - No support for "MapAndreas" or other big files (because Git doesn't allow it)
 - No special image tagging/versioning except for usage of "latest" tag, so any older versioned images are removed and unusable

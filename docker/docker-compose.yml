@@ -1,4 +1,4 @@
-version: "2"
+version: "3.7"
 
 services:
   samp-server:
@@ -40,10 +40,10 @@ services:
       - samp-network
       - admin-network
     environment:
-      MYSQL_DATABASE: 'samp'
-      MYSQL_USER: 'samp'
-      MYSQL_PASSWORD: 'p455w0r9'
-      MYSQL_ROOT_PASSWORD: 'r007p455w0r9'
+      MYSQL_DATABASE: samp
+      MYSQL_USER: samp
+      MYSQL_PASSWORD: p455w0r9
+      MYSQL_ROOT_PASSWORD: r007p455w0r9
 
 networks:
   samp-network:
